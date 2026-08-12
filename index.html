@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101216">
+  <title>Wer bin ich?</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="app">
+  <section class="screen active" id="home">
+    <div class="logo">WER BIN ICH?</div>
+    <p class="subtitle">Das geheime Ja-/Nein-Spiel</p>
+    <button class="primary large" id="newGame">Neues Spiel</button>
+    <button class="secondary" id="rules">So funktioniert's</button>
+  </section>
+
+  <section class="screen" id="setup">
+    <header><button class="back" data-back="home">←</button><h1>Spiel einrichten</h1></header>
+    <div class="card">
+      <h2>Spieler</h2>
+      <div class="segmented" id="playerCount">
+        <button data-count="2">2</button><button data-count="3">3</button><button data-count="4" class="selected">4</button>
+      </div>
+      <div id="players"></div>
+    </div>
+    <div class="card">
+      <h2>Spielende</h2>
+      <p class="muted">Nach wie vielen Volltreffern soll das Spiel beendet werden?</p>
+      <div class="segmented" id="finishCount"></div>
+    </div>
+    <button class="primary" id="startGame">Weiter</button>
+  </section>
+
+  <section class="screen center" id="assignmentPass">
+    <div class="phone">📱</div><p class="eyebrow">Identitäten verteilen</p>
+    <h1 id="assignmentPassTitle">Gib das Handy weiter</h1>
+    <p class="muted" id="assignmentPassText"></p>
+    <button class="primary large" id="assignmentStart">Start</button>
+  </section>
+
+  <section class="screen" id="assignment">
+    <header><div><span class="eyebrow">Identität bestimmen</span><h1 id="chooserName">-</h1></div></header>
+    <div class="card">
+      <p class="muted">Du entscheidest jetzt, wer diese Person ist.</p>
+      <div class="targetBox"><span class="eyebrow">Diese Person</span><strong id="targetName">-</strong></div>
+      <label class="inputLabel">Identität eingeben</label>
+      <input id="identityInput" class="bigInput" type="text" maxlength="60" autocomplete="off" placeholder="z. B. Harry Potter">
+      <p class="muted smallText">Die Identität wird geheim gespeichert. Die anderen Spieler dürfen sie nicht sehen.</p>
+    </div>
+    <button class="primary" id="confirmIdentity">Identität bestätigen</button>
+  </section>
+
+  <section class="screen center" id="assignmentDone">
+    <div class="phone">📱</div><p class="eyebrow">Gespeichert</p><h1>Identität wurde festgelegt</h1>
+    <p class="muted" id="nextChooserText"></p>
+    <button class="primary large" id="nextChooser">Handy weitergeben</button>
+  </section>
+
+  <section class="screen center" id="pass">
+    <div class="phone">📱</div><p class="eyebrow">Neue Runde</p>
+    <h1 id="passTitle">Gib das Handy weiter</h1>
+    <p class="muted" id="passText"></p>
+    <button class="primary large" id="passStart">Start</button>
+  </section>
+
+  <section class="screen center" id="secret">
+    <p class="eyebrow">Streng geheim</p><h1 id="secretTarget">Max ist:</h1>
+    <div class="secretName" id="secretName">-</div>
+    <p class="muted">Merke dir die Identität. Niemand außer dir darf sie sehen.</p>
+    <button class="primary large" id="secretReady">Bereit</button>
+  </section>
+
+  <section class="screen center" id="passToGuesser">
+    <div class="phone">📱</div><p class="eyebrow">Jetzt wird geraten</p>
+    <h1 id="guesserPassTitle">Gib das Handy weiter</h1>
+    <p class="muted" id="guesserPassText"></p>
+    <button class="primary large" id="guesserStart">Start</button>
+  </section>
+
+  <section class="screen" id="round">
+    <header class="roundHeader"><div><span class="eyebrow">Ratet</span><strong id="guesser">-</strong></div><div class="timer" id="timer">15</div></header>
+    <div class="question"><div class="questionMark">?</div><h1>Stelle Fragen!</h1><p class="muted">Die andere Person darf nur mit Ja oder Nein antworten.</p></div>
+    <div class="answers">
+      <button class="answer yes" id="yes">JA<small>+5 Sekunden</small></button>
+      <button class="answer no" id="no">NEIN</button>
+      <button class="answer hit" id="hit">🎯 VOLLTREFFER</button>
+    </div>
+  </section>
+
+  <section class="screen center" id="success">
+    <div class="successIcon">🎉</div><p class="eyebrow">Volltreffer!</p><h1 id="successTitle">Richtig!</h1>
+    <p class="muted" id="successText"></p>
+    <button class="primary large" id="nextRound">Nächste Runde</button>
+  </section>
+
+  <section class="screen center" id="end">
+    <div class="successIcon">🏆</div><h1>Spiel beendet!</h1>
+    <p class="muted" id="endText"></p>
+    <button class="primary large" id="restart">Neues Spiel</button>
+  </section>
+
+  <section class="screen" id="rulesScreen">
+    <header><button class="back" data-back="home">←</button><h1>So funktioniert's</h1></header>
+    <div class="card rules">
+      <p><b>1.</b> 2–4 Spieler geben ihre Namen ein.</p>
+      <p><b>2.</b> Die Identitäten werden nicht am Anfang eingegeben.</p>
+      <p><b>3.</b> Die App bestimmt zufällig, welcher Spieler für welchen anderen Spieler eine Identität festlegt.</p>
+      <p><b>4.</b> Niemand darf seine eigene Identität festlegen.</p>
+      <p><b>5.</b> Jede Identität wird nur einmal vergeben.</p>
+      <p><b>6.</b> Die Identität bleibt für das komplette Spiel unverändert.</p>
+      <p><b>7.</b> Der Antwortende sieht, <b>wer der ratende Spieler ist</b> und welche Identität dieser hat.</p>
+      <p><b>8.</b> Die Runde beginnt mit 15 Sekunden.</p>
+      <p><b>9.</b> JA gibt 5 Sekunden dazu.</p>
+      <p><b>10.</b> NEIN beendet die Runde.</p>
+      <p><b>11.</b> VOLLTREFFER beendet die Runde sofort.</p>
+      <p><b>12.</b> VOLLTREFFER gibt keine zusätzlichen 5 Sekunden.</p>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
