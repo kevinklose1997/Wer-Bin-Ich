@@ -3,6 +3,7 @@
   "short_name": "Wer bin ich?",
   "description": "Das geheime Ja-/Nein-Spiel",
   "start_url": "./index.html",
+  "id": "./",
   "display": "standalone",
   "background_color": "#101216",
   "theme_color": "#101216",
